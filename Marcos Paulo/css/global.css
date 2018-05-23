@@ -1,0 +1,40 @@
+@import url(../css/fontawesome-all.min.css);
+
+/* GLOBAL */
+.none {display: none;}
+.pointer {cursor: pointer;}
+
+/* MAIN */
+html {position: relative; min-height: 100%;}
+.container {max-width: 1200px;}
+
+/*THUMB VIDEO*/
+ul {list-style: none;}
+li {cursor: pointer;}
+video,
+iframe {border:0 none; width: 100%; height: 400px;}
+video {background: #000; }
+
+.play-video {color: #fff; position: absolute; left: 50%; top: 39%; transform: translate3d(-50%,0,0); font-size: 3rem;
+}
+
+.video-controls {background: rgba(0,0,0,0.8); position: absolute; left: 0; bottom: 6px; right: 0; color: #48A0F7; padding: 5px 10px;
+}
+
+.fa-pause.bigPause{margin-right: 15px; font-size: 3.5rem}
+.fa-pause.smallPause, .fa-play.smallPlay{font-size: 1rem}
+.fa-arrows-alt{font-size: 1.1rem; margin-top: 2px;}
+
+.video-list {max-height: 400px; overflow-y: auto; border:1px solid #DDD;}
+.video-list li div.col:first-child{position: relative;}
+.video-list li div.col:first-child:before{content:"\f04b"; font-weight: 900; font-family: "Font Awesome 5 Free"; position: absolute; left: 50%; top: 50%; font-size: .8em; transform: translate3d(-50%, -50%, 0); color: #FFF; width: 45px; height: 31px; background: rgba(0,0,0, .6); padding: 7px 18px; border-radius: 9px / 12px; transition: all .2s ease; line-height: 17px;}
+.video-list li div.col:hover:first-child:before{transform: translate3d(-50%, -50%, 0) scale(1.1); background: #F00;}
+
+#main-video div.desc {overflow-y: hidden; line-height: 26px;}
+#main-video div.desc.min {height: 80px;}
+
+.video-content{position: relative;}
+
+@media (max-width: 767px){
+	.video-list {max-height: 375px;}
+}
