@@ -26,20 +26,35 @@ $(document).ready(function() {
 		jThis.toggleClass('vejaMais vejaMenos');
 	});
 
+	// PERMITIR TELA FICAR EM FULLSCREEN
+	$(document).toggleFullScreen();
+
+	$('.video-controls').children('i.fa-arrows-alt').click(function(){
+		$('.video-content').toggleFullScreen(true).toggleClass('fullscreen');
+	})
+		
+
+	$(document).keyup(function(e) {
+	     if (e.keyCode == 27) { // escape key maps to keycode `27`
+	        $(".video-content").removeClass('fullscreen')
+	    }
+	});
+	
+
 	// CRIAR O MAIN VIDEO
 	createMainVideo( $('.video-list').children('li:first-child') );
 
 	
 	// CLIQUE NO PLAY PRINCIPAL
 	$('video').click(function(){
-		if ($('i').hasClass('fa-play bigPlay')) {
-			$('i.bigPlay').removeClass('fa-play bigPlay').addClass('fa-pause bigPause').hide(150);
+		if ($('i.fa-play').hasClass('bigPlay')) {
+			$(this).siblings('.play-video').children().removeClass('fa-play bigPlay').addClass('fa-pause bigPause').hide(150);
 			$('i.smallPlay').removeClass('fa-play smallPlay').addClass('fa-pause smallPause');
 			$(this).get(0).play();
 		}
 		else{
-			$('i.bigPause').removeClass('fa-pause bigPause').addClass('fa-play bigPlay').show();
-					$('i.smallPause').removeClass('fa-pause smallPause').addClass('fa-play smallPlay');
+			$(this).siblings('.play-video').children().removeClass('fa-pause bigPause').addClass('fa-play bigPlay').show();
+			$('i.smallPause').removeClass('fa-pause smallPause').addClass('fa-play smallPlay');
 
 			$(this).get(0).pause();
 		}
@@ -49,16 +64,23 @@ $(document).ready(function() {
 	$('.video-controls').find('i.smallPlay').click(function(){
 
 		$('i.bigPlay').removeClass('fa-play bigPlay').addClass('fa-pause bigPause').hide(150);
-		$('i.smallPlay').removeClass('fa-play smallPlay').addClass('fa-pause smallPause');
+		$(this).removeClass('fa-play smallPlay').addClass('fa-pause smallPause');
 		$('video').get(0).play();
 	})
 
 	// CLIQUE NO PAUSE PEQUENO
-	$('.video-controls').find('i.smallPause').click(function(){
+	$('.video-controls').children('i.fa-pause').click(function(){
 
-		$('i.smallPause').removeClass('fa-pause smallPause').addClass('fa-play smallPlay');
-		$('video').get(0).pause();
+		if ($(this).hasClass('smallPause')) {
+
+			$('video').siblings('.play-video').children().removeClass('fa-pause bigPause').addClass('fa-play bigPlay').show();
+			$(this).removeClass('fa-pause smallPause').addClass('fa-play smallPlay');
+
+			$('video').get(0).pause();
+		}
 	})
+
+
 
 	// PLAY APARECE AO FIM DO VIDEO
 	$('video').on('pause', function() {
